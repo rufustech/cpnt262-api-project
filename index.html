@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Audiowide&family=Courgette&family=Eagle+Lake&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Petit+Formal+Script&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js" defer></script>
+
+    <title>Weather</title>
+  </head>
+  <body class="mx-auto chakra-petch-regular">
+    <div class="container mx-auto flex-col">
+      <header
+        class="container align-center flex flex-col justify-center items-center mx-auto bg-[#1900ff]"
+      >
+        <nav class="header h-24 py-8 text-white text-5xl">
+          <h2>Weather Channel</h2>
+        </nav>
+      </header>
+      <section class="mx-auto merriweather-regular w-96 mt-6">
+        <div
+          id=""
+          class="align-center flex flex-col justify-center items-center city-card p-2 text-[#022977] shadow-white shadow-lg bg-[#fbe505] w-[] rounded-lg"
+        >
+          <h1 class="header p-8 font-bold text-3xl">
+            Welcome <span id="firstName"></span>Enter City
+          </h1>
+          <div class="city-weather px-8">
+            <form id="weather-form">
+              <label for="city">Enter City Name:</label>
+              <input
+                class="p-2 rounded-md"
+                type="text"
+                id="city"
+                name="city"
+                required
+              />
+
+              <label for="username">Your Name:</label>
+              <input
+                class="p-2 rounded-md"
+                type="text"
+                id="username"
+                name="username"
+                required
+              />
+
+              <label for="unit-toggle">Temperature Unit (°C/°F):</label>
+              <select
+                class="p-2 rounded-md"
+                id="unit-toggle"
+                name="unit-toggle"
+              >
+                <option value="metric">°C</option>
+                <option value="imperial">°F</option>
+              </select>
+
+              <button
+                class="p-2 bg-[#36549c] text-white font-bold animate-bounce mt-4"
+                type="submit"
+              >
+                Get Weather
+              </button>
+            </form>
+            <div class="py-2 text-2xl" id="greeting"></div>
+
+            <div id="weather-card pb-10">
+              <h3 class="py-2 text-3xl" id="city-name"></h3>
+              <p class="py-2 text-2xl" id="weather-description"></p>
+              <p class="py-2 text-2xl" id="temperature"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer
+        class="align-center flex flex-col justify-center items-center mt-20"
+      >
+        <p class="text-white">&copy; 2024 Weather Dashboard</p>
+      </footer>
+    </div>
+  </body>
+</html>
