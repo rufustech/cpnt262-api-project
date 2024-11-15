@@ -1,37 +1,53 @@
-// Declare my variables
+//Declare my variables
+
 const APIKEY = "9603944ddfe2d94ec534f7dbb5b11ec1";
 const weatherForm = document.getElementById("weather-form");
 const cityInput = document.getElementById("city");
 const usernameInput = document.getElementById("username");
 const unitToggle = document.getElementById("unit-toggle");
 const weatherCard = document.getElementById("weather-card");
-const greetingDiv = document.getElementById("greeting");
+const greetingDiv = document.getElementById("greeting");      //My Divs
 const cityNameDiv = document.getElementById("city-name");
 const weatherDescDiv = document.getElementById("weather-description");
 const tempDiv = document.getElementById("temperature");
 
-// First On page load, retrieve and display saved preferences
-window.onload = function () {
-  // Load city and username from sessionStorage/localStorage
-  const savedCity = localStorage.getItem("lastSearchedCity"); //last searched data, City Humid, return Array //local storage, save all data
-  const savedUnit = sessionStorage.getItem("unit"); //Session
-  const savedUsername = localStorage.getItem("username"); //Cookies
 
-  if (savedCity) {
-    cityInput.value = savedCity;
-    //Default to metric since in Canada we use Celcius
-    getCurrentWeather(savedCity, savedUnit || "metric"); //Local storage TODO: LOOPS
-    // parsing cookies
-  }
+// When the page loads, retrieve and display saved preferences
+window.onload = function () {
+  const savedCity = localStorage.getItem("lastSearchedCity");
+  const savedUnit = sessionStorage.getItem("unit");
+
+  // Retrieve the username from the cookie
+  const savedUsername = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('username='))
+    ?.split('=')[1];
 
   if (savedUsername) {
     usernameInput.value = savedUsername;
-    document.cookie = `myCookie=${savedUnit}; max-age=300`;
     displayGreeting(savedUsername);
   }
 
-  if (savedUnit) {
+  if (savedCity && savedUnit) {
+    cityInput.value = savedCity;
     unitToggle.value = savedUnit;
+
+    // Load weather data from localStorage and display it using a loop
+    const savedWeatherData = JSON.parse(localStorage.getItem("weatherData"));
+
+    if (savedWeatherData) {
+      for (const [key, value] of Object.entries(savedWeatherData)) {
+        if (key === "city") {
+          cityNameDiv.textContent = `Weather in ${value}`;
+        } else if (key === "description") {
+          weatherDescDiv.textContent = `Conditions: ${value}`;
+        } else if (key === "humidity") {
+          weatherDescDiv.textContent += ` | Humidity: ${value}%`;
+        } else if (key === "temperature") {
+          tempDiv.textContent = `Temperature: ${value}°${savedUnit === "metric" ? "C" : "F"}`;
+        }
+      }
+    }
   }
 };
 
@@ -42,26 +58,22 @@ weatherForm.addEventListener("submit", async function (event) {
   const userName = usernameInput.value;
   const unit = unitToggle.value;
 
-  // Save preferences
+  // Set username as a cookie
   document.cookie = `username=${userName}; max-age=300`;
   localStorage.setItem("lastSearchedCity", cityName);
   sessionStorage.setItem("unit", unit);
-
-  // Display personalized greeting
   displayGreeting(userName);
 
-  // Fetch weather data
-  await getCurrentWeather(cityName, unit);
+  // Fetch and display weather data, then store it in localStorage
+  const weatherData = await getCurrentWeather(cityName, unit);
+  localStorage.setItem("weatherData", JSON.stringify(weatherData));
 });
 
-// Display personalized greeting
 function displayGreeting(name) {
-  // const para = document.createElement(p)
   greetingDiv.textContent = `Good Day, ${name}! Your weather stats below`;
 }
-//test
 
-// Fetch current weather for a given city and unit
+
 async function getCurrentWeather(cityName, unit = "metric") {
   const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${unit}&appid=${APIKEY}`;
 
@@ -77,17 +89,23 @@ async function getCurrentWeather(cityName, unit = "metric") {
     const description = data.weather[0].description;
     const city = data.name;
 
-    // Update the DOM with weather data
     cityNameDiv.textContent = `Weather in ${city}`;
-    weatherDescDiv.textContent = `Conditions: ${description}`;
-    weatherDescDiv.textContent = `Humidity: ${humidity}`;
-    if (unit === "metric") {
-      tempDiv.textContent = `Temperature: ${temperature}°C`;
-    } else {
-      tempDiv.textContent = `Temperature: ${temperature}°F`;
-    }
+    weatherDescDiv.textContent = `Conditions: ${description} | Humidity: ${humidity}%`;
+    tempDiv.textContent = `Temperature: ${temperature}°${unit === "metric" ? "C" : "F"}`;
+
+    return { city, description, humidity, temperature };
   } catch (error) {
     console.error("Error fetching weather data: ", error);
     alert(`City: ${cityName} not found, please try again.`);
   }
 }
+
+
+
+
+
+
+
+
+
+
