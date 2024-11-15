@@ -106,6 +106,7 @@ async function getCurrentWeather(cityName, unit = "metric") {
   } catch (error) {
     console.error("Error fetching weather data: ", error);
     alert(`City: ${cityName} not found, please try again.`);
+    cityNameDiv.textContent = `City: ${cityName} not found, please try again.`;
   }
 }
 
