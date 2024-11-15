@@ -21,5 +21,5 @@ This Weather Dashboard app fetches live weather data for any city entered by the
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/yourusername/weather-dashboard.git
+   git clone https://github.com/rufustech/cpnt262-api-project.git
    cd weather-dashboard

@@ -99,7 +99,7 @@ async function getCurrentWeather(cityName, unit = "metric") {
     cityNameDiv.textContent = `Weather in ${city}`;
     weatherDescDiv.textContent = `Conditions: ${description} | Humidity: ${humidity}%`;
     tempDiv.textContent = `Temperature: ${temperature}°${
-      unit === "metric" ? "C" : "F"
+      unit === "metric" ? "C" : "F" //TENARY OPERATOR TODO:
     }`;
 
     return { city, description, humidity, temperature };
