@@ -5,6 +5,7 @@
 This Weather Dashboard app fetches live weather data for any city entered by the user. It uses a modern, user-friendly design, with support for temperature units in Celsius and Fahrenheit. The app offers personalization features to store the user’s preferences (such as the last searched city, unit type, and username) through cookies, local storage, and session storage.
 
 ## Features
+
 - **City Weather Search**: Users can search for the current weather in any city.
 - **Unit Toggle**: Allows users to choose between Celsius and Fahrenheit.
 - **Personalized Greeting**: The app greets users with their saved name, retrieved from cookies.
@@ -12,6 +13,7 @@ This Weather Dashboard app fetches live weather data for any city entered by the
 - **Responsive Design**: Styled with modern web features to ensure usability across devices.
 
 ## Key Technologies
+
 - **HTML, CSS, JavaScript**
 - **Fetch API** for weather data
 - **Local Storage, Session Storage, Cookies** for user preferences
@@ -23,3 +25,4 @@ This Weather Dashboard app fetches live weather data for any city entered by the
    ```bash
    git clone https://github.com/rufustech/cpnt262-api-project.git
    cd weather-dashboard
+   ```
