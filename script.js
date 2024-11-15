@@ -1,5 +1,4 @@
 //Declare my variables
-
 const APIKEY = "9603944ddfe2d94ec534f7dbb5b11ec1";
 const weatherForm = document.getElementById("weather-form");
 const cityInput = document.getElementById("city");
@@ -11,9 +10,8 @@ const cityNameDiv = document.getElementById("city-name");
 const weatherDescDiv = document.getElementById("weather-description");
 const tempDiv = document.getElementById("temperature");
 
-
 // When the page loads, retrieve and display saved preferences
-window.onload = function () {
+window.onload = () => {
   const savedCity = localStorage.getItem("lastSearchedCity");
   const savedUnit = sessionStorage.getItem("unit");
 
@@ -72,7 +70,6 @@ weatherForm.addEventListener("submit", async function (event) {
 function displayGreeting(name) {
   greetingDiv.textContent = `Good Day, ${name}! Your weather stats below`;
 }
-
 
 async function getCurrentWeather(cityName, unit = "metric") {
   const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${unit}&appid=${APIKEY}`;
