@@ -121,7 +121,7 @@ function displayWeather(weatherData, unit) {
 
   // Update the DOM elements with the weather data
   cityNameDiv.textContent = `Weather in ${city}`;
-  weatherDescDiv.textContent = `Conditions: ${description} | Humidity: ${humidity}%`;
+  weatherDescDiv.textContent = `Conditions: ${description}  Humidity: ${humidity}%`;
   tempDiv.textContent = `Temperature: ${temperature}°${
     unit === "metric" ? "C" : "F"
   }`;
