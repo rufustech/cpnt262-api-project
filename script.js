@@ -1,5 +1,5 @@
 // Declare your variables
-const APIKEY = "9603944ddfe2d94ec534f7dbb5b11ec1";
+const APIKEY = "__API_KEY__";
 const weatherForm = document.getElementById("weather-form");
 const cityInput = document.getElementById("city");
 const usernameInput = document.getElementById("username");
